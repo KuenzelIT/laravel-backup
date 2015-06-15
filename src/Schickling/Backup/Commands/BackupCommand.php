@@ -20,7 +20,7 @@ class BackupCommand extends BaseCommand
 
 		if ($this->argument('filename'))
 		{
-			$this->fileName = basename($this->filePath);
+			$this->fileName = $this->argument('filename');
 		}
 		else
 		{
