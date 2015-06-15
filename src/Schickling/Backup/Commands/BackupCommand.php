@@ -20,24 +20,14 @@ class BackupCommand extends BaseCommand
 
 		if ($this->argument('filename'))
 		{
-			// Is it an absolute path?
-			if (substr($this->argument('filename'), 0, 1) == '/')
-			{
-				$this->filePath = $this->argument('filename');
-				$this->fileName = basename($this->filePath);
-			}
-			// It's relative path?
-			else
-			{
-				$this->filePath = getcwd() . '/' . $this->argument('filename');
-				$this->fileName = basename($this->filePath);
-			}
+			$this->fileName = basename($this->filePath);
 		}
 		else
 		{
 			$this->fileName = date('YmdHis') . '.' .$database->getFileExtension();
-			$this->filePath = rtrim($this->getDumpsPath(), '/') . '/' . $this->fileName;
 		}
+			
+		$this->filePath = rtrim($this->getDumpsPath(), '/') . '/' . $this->fileName;
 
 		$status = $database->dump($this->filePath);
 
